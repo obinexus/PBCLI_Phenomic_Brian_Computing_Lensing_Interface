@@ -1,5 +1,3 @@
-Looking at your request and the context from the Discord discussions and RIFT glossary, I'll create the PBCLI Vision Compliance documentation with RIFTer policies and the warp drive team simulation example.
-
 ## PBCLI Vision Compliance Documentation
 
 ```markdown
