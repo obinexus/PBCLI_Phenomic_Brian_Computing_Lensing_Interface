@@ -1,0 +1,53 @@
+<!-- File: schemas/obinexus_county_schema.xsd -->
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://obinexus.org/county"
+           xmlns:tns="http://obinexus.org/county"
+           elementFormDefault="qualified">
+    
+    <!-- County Organization Structure -->
+    <xs:complexType name="CountyOrganization">
+        <xs:sequence>
+            <xs:element name="department" type="xs:string"/>
+            <xs:element name="division" type="xs:string"/>
+            <xs:element name="county" type="xs:string"/>
+            <xs:element name="phenomenologicalData" type="tns:PhenomenologicalData"/>
+        </xs:sequence>
+        <xs:attribute name="fqdn" type="xs:string" use="required"/>
+    </xs:complexType>
+    
+    <!-- Phenomenological Data Structure -->
+    <xs:complexType name="PhenomenologicalData">
+        <xs:sequence>
+            <xs:element name="auraSeal" type="xs:base64Binary"/>
+            <xs:element name="tokens" type="tns:TokenList"/>
+            <xs:element name="pruningPolicy" type="tns:PruningPolicy"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Token List -->
+    <xs:complexType name="TokenList">
+        <xs:sequence>
+            <xs:element name="token" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="type" type="xs:string"/>
+                            <xs:attribute name="score" type="xs:decimal"/>
+                            <xs:attribute name="language" type="xs:language"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Pruning Policy -->
+    <xs:complexType name="PruningPolicy">
+        <xs:sequence>
+            <xs:element name="threshold" type="xs:decimal"/>
+            <xs:element name="semverPattern" type="xs:string"/>
+            <xs:element name="staleAfterDays" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
